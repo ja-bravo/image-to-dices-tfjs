@@ -35,15 +35,12 @@ export const predictResults = (model: tf.LayersModel, grid: any) => {
 
     // Create array of properly sized tensors
     grid.forEach((row: any) => {
-      patchStack.push(tf.image.resizeNearestNeighbor(tf.stack(row), [12, 12]));
+      patchStack.push(tf.image.resizeNearestNeighbor(tf.stack(row) as tf.Tensor<tf.Rank.R3>, [12, 12]));
     });
 
     // Let the Model find the answers
     const imageGroup = tf.concat(patchStack);
-    console.log('Ready to predict shape ', imageGroup.shape);
-    const answers = model.predict(imageGroup);
-    console.log('Predicted shape ', answers.shape);
-    return answers;
+    return model.predict(imageGroup);
   });
 };
 
