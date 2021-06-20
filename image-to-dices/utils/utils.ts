@@ -17,6 +17,7 @@ export const turnIntoBlackAndWhite = (imageTensor: tf.Tensor3D) => {
 
   return blackAndWhite;
 };
+
 export const cutIntoGrid = (imageTensor: tf.Tensor3D, numberOfDices: number) => {
   const resizeSize = numberOfDices * 10;
 

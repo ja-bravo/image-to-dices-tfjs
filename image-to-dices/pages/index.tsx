@@ -17,7 +17,7 @@ export default function Home() {
       });
   }, []);
 
-  const [numOfDices, setNumOfDices] = useState(32);
+  const [numOfDices, setNumOfDices] = useState(64);
   const [loading, setLoading] = useState(false);
 
   return (
@@ -43,7 +43,15 @@ export default function Home() {
       </h2>
 
       <p>Dices per row: {numOfDices}</p>
-      <input type="range" id="vol" name="vol" min="16" max="64" value={numOfDices} onChange={(e) => setNumOfDices(Number.parseInt(e.target.value))} />
+      <input
+        type="range"
+        id="vol"
+        name="vol"
+        min="32"
+        max="128"
+        value={numOfDices}
+        onChange={(e) => setNumOfDices(Number.parseInt(e.target.value))}
+      />
 
       <div className="w-full flex flex-row h-[75vh]  mt-8">
         <div className="flex-1 h-full flex flex-col justify-center items-center">
