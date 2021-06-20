@@ -4,7 +4,7 @@ export const turnIntoBlackAndWhite = (imageTensor: tf.Tensor3D) => {
   // Turn into grayscale
   imageTensor = imageTensor.mean(2).expandDims(2);
 
-  const threshold = 50;
+  const threshold = 127;
   const light = tf.onesLike(imageTensor).asType('float32');
   const dark = tf.zerosLike(imageTensor);
 
@@ -14,6 +14,8 @@ export const turnIntoBlackAndWhite = (imageTensor: tf.Tensor3D) => {
     dark, // False Case: place zero
     light, // True Case: place one
   );
+
+  tf.dispose([light, dark]);
 
   return blackAndWhite;
 };
@@ -27,6 +29,7 @@ export const cutIntoGrid = (imageTensor: tf.Tensor3D, numberOfDices: number) => 
   // Cut the image vertically
   const heightCuts = tf.split(resized, numberOfDices);
   const grid = heightCuts.map((col) => tf.split(col, numberOfDices, 1));
+  tf.dispose([heightCuts]);
   return grid;
 };
 
